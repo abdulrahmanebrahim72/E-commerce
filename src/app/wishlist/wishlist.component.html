@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="Products">
+        <h2 class="my-4 fs-3 text-center text-main fw-bold">Fav List</h2>
+        <div class="row gy-4 gx-3 mb-5 justify-content-center">
+            <div attr.productId="{{data.id}}" class="col-md-3 product cursor-pointer p-4"
+             *ngFor="let data of productData">
+               <a [routerLink]="['/details',data._id]">
+                <figure>
+                    <img [src]="data.imageCover" class="w-100 imgStyleForCat">
+                    <figcaption class="text-center">
+                        <p class="text-main">{{data.category.name}}</p>
+                        <h6 class="fw-semibold">{{data.title.split(' ').slice(0,2).join(' ')}}</h6>
+                        <div class="d-flex justify-content-between mx-auto my-2 text-muted px-4">
+                            <span>{{data.price}} EGP</span>
+                            <span>
+                                <i *ngFor="let star of [1,2,3,4,5];"
+                                [class.rating-color]="data.ratingsAverage >= star"
+                                class="fa-solid fa-star"></i> {{data.ratingsAverage}}
+                            </span>
+                        </div>
+                    </figcaption>
+                </figure>
+               </a>
+               <div class="my-3">
+                <i (click)="removeWishListItem(data._id)" class="fa-solid fa-heart fs-2 text-danger heart"></i>
+               </div>
+                <button (click)="addToCart(data._id , btnAdd)" #btnAdd class="btn text-light bg-main w-100">Add +</button>
+            </div>
+        </div>
+       </div>
+</div>

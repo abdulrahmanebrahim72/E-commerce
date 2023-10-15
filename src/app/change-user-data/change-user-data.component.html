@@ -1,0 +1,50 @@
+<div class="container my-4">
+    <h2 class="my-3 fw-bold fs-4 text-main text-center">Change User Data:</h2>
+    <div *ngIf="errMessage?.length > 0" class="alert alert-danger w-75 mx-auto">
+        <h5 class="text-center">{{errMessage}}</h5>
+    </div>
+    <div *ngIf="sucMessage?.length > 0" class="alert alert-success w-75 mx-auto">
+        <h5 class="text-center">{{sucMessage}}</h5>
+    </div>
+    <form class="w-75 mx-auto bg-light p-4" [formGroup]="updateDataForm" (ngSubmit)="updateData(updateDataForm)">
+            
+        <div class="mb-4">
+            <input formControlName="name"  type="text" placeholder="Name"
+            [class.is-invalid]="updateDataForm.get('name')?.errors&&
+            updateDataForm.get('name')?.touched"
+            [class.is-valid]="updateDataForm.get('name')?.errors == null"
+            class="form-control" />
+            <div *ngIf="updateDataForm.get('name')?.errors&&updateDataForm.get('name')?.touched" class="alert alert-danger">
+                <p class="text-center" *ngIf="updateDataForm.get('name')?.getError('required')">Required input</p>
+                <p class="text-center" *ngIf="updateDataForm.get('name')?.getError('minlength')">min length 3</p>
+                <p class="text-center" *ngIf="updateDataForm.get('name')?.getError('maxlength')">max length 15</p>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <input formControlName="email"  type="email" placeholder="Email"
+            [class.is-invalid]="updateDataForm.get('email')?.errors&&
+            updateDataForm.get('email')?.touched"
+            [class.is-valid]="updateDataForm.get('email')?.errors == null"
+            class="form-control" />
+            <div *ngIf="updateDataForm.get('email')?.errors&&updateDataForm.get('email')?.touched" class="alert alert-danger">
+                <p class="text-center" *ngIf="updateDataForm.get('email')?.getError('required')">Required input</p>
+                <p class="text-center" *ngIf="updateDataForm.get('email')?.getError('email')">enter a valid email</p>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <input formControlName="phone"  type="tel" placeholder="Phone"
+            [class.is-invalid]="updateDataForm.get('phone')?.errors&&
+            updateDataForm.get('phone')?.touched"
+            [class.is-valid]="updateDataForm.get('phone')?.errors == null"
+            class="form-control" />
+            <div *ngIf="updateDataForm.get('phone')?.errors&&updateDataForm.get('phone')?.touched" class="alert alert-danger">
+                <p class="text-center" *ngIf="updateDataForm.get('phone')?.getError('required')">Required input</p>
+                <p class="text-center" *ngIf="updateDataForm.get('phone')?.getError('pattern')">enter a valid phone Number</p>
+            </div>
+        </div>
+       
+        <button [disabled]="updateDataForm.invalid" type="submit" class="btn btn-outline-success px-4">Confirm</button>
+    </form>
+</div>

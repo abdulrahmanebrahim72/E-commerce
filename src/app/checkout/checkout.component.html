@@ -1,0 +1,27 @@
+<form class="w-50 mx-auto my-5" [formGroup]="payment" (ngSubmit)="onlinePayment(payment)">
+    <div class="mb-3">
+        <label for="details">details:</label>
+        <input class="form-control" type="text" id="details" formControlName="details">
+        <div *ngIf="payment.get('details')?.errors&&payment.get('details')?.touched" class="alert alert-danger">
+            <p class="text-center" *ngIf="payment.get('details')?.getError('required')">Required input</p>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="phone">phone:</label>
+        <input class="form-control" type="tel" id="phone" formControlName="phone">
+        <div *ngIf="payment.get('phone')?.errors&&payment.get('phone')?.touched" class="alert alert-danger">
+            <p class="text-center" *ngIf="payment.get('phone')?.getError('required')">Required input</p>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="city">city:</label>
+        <input class="form-control" type="text" id="city" formControlName="city">
+        <div *ngIf="payment.get('city')?.errors&&payment.get('city')?.touched" class="alert alert-danger">
+            <p class="text-center" *ngIf="payment.get('city')?.getError('required')">Required input</p>
+        </div>
+    </div>
+
+    <button [disabled]="payment.invalid" class="btn btn-success text-light my-3">Pay</button>
+</form>

@@ -1,0 +1,87 @@
+<section class="py-5">
+    <button *ngIf="isLogin" (click)="scrollToTop()" class="bg-main border-0 rounded-1 btn-up">
+        <i class="fa-solid fa-arrow-up text-light fa-1x"></i>
+    </button>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" #navEl>
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold fs-4" routerLink="/home"><img class="me-1" src="../../assets/imgs/cart-green-background.svg" width="30px" alt="">FreshCart</a>
+          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavId">
+              <ul *ngIf="isLogin" class="navbar-nav mt-2 mt-lg-0 text-center flex-wrap">
+  
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="home" routerLinkActive="bg-main text-white rounded-2">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="products" routerLinkActive="bg-main text-white rounded-2">Products</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="categories" routerLinkActive="bg-main text-white rounded-2">Categories</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="brands" routerLinkActive="bg-main text-white rounded-2">Brands</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="profile" routerLinkActive="bg-main text-white rounded-2">Profile <i class="fa-solid fa-user fs-5"></i></a>
+                  </li>
+                                  
+              </ul>
+              <ul class="navbar-nav mt-2 mt-lg-0 align-items-center flex-wrap text-center ms-auto">
+                <li class="nav-item position-relative">
+                    <a class="nav-link" routerLink="wishlist" *ngIf="isLogin">
+                        <i class="fa-solid fa-heart fs-2 cursor-pointer badge1"></i>
+                        <span class="position-absolute top-0 end-0 text-light bg-danger badge">{{wishListNumber}}</span>
+                    </a>
+                </li>
+                <li class="nav-item position-relative">
+                    <a class="nav-link" routerLink="cart" *ngIf="isLogin">
+                        <i class="fa-solid fa-cart-shopping fs-2 cursor-pointer text-main"></i>
+                        <span class="position-absolute top-0 end-0 bg-success text-light badge">{{cartNumber}}</span>
+                    </a>
+                </li>
+                  <li class="nav-item">
+                      <a class="nav-link" target="_blank" href="https://www.facebook.com/aabdo987">
+                          <i class="fa-brands fa-facebook text-primary"></i>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" target="_blank" href="https://twitter.com/i/flow/login">
+                          <i class="fa-brands fa-twitter text-info"></i>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" target="_blank" href="https://www.instagram.com/abdulrahman_e_abdullah/">
+                          <i class="fa-brands fa-instagram text-danger"></i>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" target="_blank" href="https://www.linkedin.com/in/abdulrahman-ebrahim-223a42255/">
+                          <i class="fa-brands fa-linkedin text-primary"></i>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" target="_blank" href="https://www.youtube.com/">
+                          <i class="fa-brands fa-youtube text-danger"></i>
+                      </a>
+                  </li>
+                  <li *ngIf="!isLogin" class="nav-item">
+                      <a class="nav-link" routerLink="register" routerLinkActive="bg-main text-white rounded-2">Register</a>
+                  </li>
+                  <li *ngIf="!isLogin" class="nav-item">
+                      <a class="nav-link" routerLink="login" routerLinkActive="bg-main text-white rounded-2">LogIn</a>
+                  </li>
+                  <li *ngIf="isLogin" class="nav-item">
+                      <a (click)="logOutPressed();" class="nav-link" routerLink="logout">LogOut</a>
+                  </li>
+                  
+              </ul>
+              
+          </div>
+    </div>
+  </nav>
+  
+  
+</section>

@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="Products">
+        <h2 class="my-4 fs-3">All <span class="text-main fw-bold">Products</span></h2>
+        <div class="row gy-4 gx-3 mb-5">
+            <div attr.productId="{{data.id}}" class="col-md-3 product cursor-pointer p-4"
+             *ngFor="let data of productData | paginate: { id: 'productPaginate',
+             itemsPerPage: pageSize,
+             currentPage: curentPage,
+             totalItems: total }">
+               <a [routerLink]="['/details',data._id]">
+                <figure>
+                    <img [src]="data.imageCover" class="w-100 imgStyleForCat">
+                    <figcaption class="text-center">
+                        <p class="text-main">{{data.category.name}}</p>
+                        <h6 class="fw-semibold">{{data.title.split(' ').slice(0,2).join(' ')}}</h6>
+                        <div class="d-flex justify-content-between mx-auto my-2 text-muted px-4">
+                            <span>{{data.price}} EGP</span>
+                            <span>
+                                <i *ngFor="let star of [1,2,3,4,5];"
+                                [class.rating-color]="data.ratingsAverage >= star"
+                                class="fa-solid fa-star"></i> {{data.ratingsAverage}}
+                            </span>
+                        </div>
+                    </figcaption>
+                </figure>
+               </a>
+               <div class="my-3">
+                <i *ngIf="!wishListData.includes(data._id)" (click)="addToFav(data._id)" class="fa-regular fa-heart fs-2 text-danger heart"></i>
+                <i *ngIf="wishListData.includes(data._id)" (click)="removeWishListItem(data._id)" class="fa-solid fa-heart fs-2 text-danger heart"></i>
+               </div>
+                <button (click)="addToCart(data._id , btnAdd)" #btnAdd class="btn text-light bg-main w-100">Add +</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center my-5">
+        <pagination-controls  id="productPaginate"
+                      (pageChange)="pageChanged($event)"
+                      (pageBoundsCorrection)="pageChanged($event)"
+                      [maxSize]="9"
+                      [directionLinks]="true"
+                      [autoHide]="true"
+                      [responsive]="true"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+
+</div>

@@ -1,0 +1,36 @@
+<div class="my-5 w-75 mx-auto">
+    <h2 class="mb-3 fw-bold fs-4 text-main">logIn Form:</h2>
+    <div *ngIf="errMessage?.length > 0" class="alert alert-danger">
+        <h5 class="text-center">{{errMessage}}</h5>
+    </div>
+
+        <form [formGroup]="signInForm" (ngSubmit)="logIn(signInForm)">
+            
+            <div class="mb-4">
+                <label for="">email:</label>
+                <input formControlName="email" type="email"
+                [class.is-invalid]="signInForm.get('email')?.errors&&signInForm.get('email')?.touched"
+                [class.is-valid]="signInForm.get('email')?.errors == null"
+                class="form-control" />
+                <div *ngIf="signInForm.get('email')?.errors&&signInForm.get('email')?.touched" class="alert alert-danger">
+                    <p class="text-center" *ngIf="signInForm.get('email')?.getError('required')">Required input</p>
+                    <p class="text-center" *ngIf="signInForm.get('email')?.getError('email')">enter a valid email</p>
+                  
+                   </div>
+            </div>
+            <div class="mb-4">
+                <label for="">password:</label>
+                <input formControlName="password"  type="password"
+                [class.is-invalid]="signInForm.get('password')?.errors&&signInForm.get('password')?.touched"
+                [class.is-valid]="signInForm.get('password')?.errors == null"
+                class="form-control" />
+                <div *ngIf="signInForm.get('password')?.errors&&signInForm.get('password')?.touched" class="alert alert-danger">
+                    <p class="text-center" *ngIf="signInForm.get('password')?.getError('required')">Required input</p>
+                    <p class="text-center" *ngIf="signInForm.get('password')?.getError('pattern')">enter a valid password</p>
+                </div>
+            </div>
+           
+            <button type="submit" class="btn btn-outline-success px-4">logIn <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i></button>
+            <a routerLink="/forgotPass" class="text-muted fw-bolder cursor-pointer ms-3 font-sm">Forgot Password?</a>
+        </form>
+    </div>

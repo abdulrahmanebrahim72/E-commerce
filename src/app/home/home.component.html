@@ -1,0 +1,76 @@
+
+<div class="container mt-3">
+
+    <app-main-slider></app-main-slider>
+
+   <div class="Categories">
+    <h2 class="mt-5 fs-3">shop popular <span class="text-main fw-bold">Categories</span></h2>
+    <div class="row mb-5">
+
+        <owl-carousel-o [options]="customOptions">
+
+            <ng-container *ngFor="let slide of categoryData">
+              <ng-template carouselSlide>
+                <img [src]="slide.image" class="w-100 p-1 imgStyleForCat">
+                <p class="fw-semibold p-1 text-main">{{slide.name}}</p>
+              </ng-template>
+            </ng-container>
+        
+        </owl-carousel-o>
+
+
+    </div>
+   </div>
+
+
+   <div class="Brands">
+    <h2 class="my-4 fs-3">shop popular <span class="text-main fw-bold">Brands</span></h2>
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let data of brandData;let last = last;">
+            <figure>
+                <img [src]="data.image" class="w-100 imgStyleForBrand">
+                <figcaption>
+                    <h6 class="text-main fw-bolder">{{data.name}}</h6>
+                </figcaption>
+            </figure>
+            <div class="d-flex justify-content-end">
+                <i routerLink="/brands" *ngIf="last" class="fa-solid fa-circle-arrow-right fs-4 cursor-pointer text-main iconScale"></i>
+            </div>
+        </div>
+    </div>
+   </div>
+
+   <input [(ngModel)]="searchValue" type="text" class="form-control my-5 w-75 mx-auto" placeholder="Search for a product">
+
+   <div class="Products">
+    <h2 class="my-4 fs-3">shop popular <span class="text-main fw-bold">Products</span></h2>
+    <div class="row gy-4 gx-3 mb-5">
+        <div attr.productId="{{data.id}}" class="col-md-3 product cursor-pointer p-4"
+         *ngFor="let data of productData | search :searchValue">
+           <a [routerLink]="['/details',data._id]">
+            <figure>
+                <img [src]="data.imageCover" class="w-100 imgStyleForCat">
+                <figcaption class="text-center">
+                    <p class="text-main">{{data.category.name}}</p>
+                    <h6 class="fw-semibold">{{data.title.split(' ').slice(0,2).join(' ')}}</h6>
+                    <div class="d-flex justify-content-between mx-auto my-2 text-muted px-4">
+                        <span>{{data.price}} EGP</span>
+                        <span>
+                            <i *ngFor="let star of [1,2,3,4,5];"
+                            [class.rating-color]="data.ratingsAverage >= star"
+                            class="fa-solid fa-star"></i> {{data.ratingsAverage}}
+                        </span>
+                    </div>
+                </figcaption>
+            </figure>
+           </a>
+           <div class="my-3">
+            <i *ngIf="!wishListData.includes(data._id)" (click)="addToFav(data._id)" class="fa-regular fa-heart fs-2 text-danger heart"></i>
+            <i *ngIf="wishListData.includes(data._id)" (click)="removeWishListItem(data._id)" class="fa-solid fa-heart fs-2 text-danger heart"></i>
+           </div>
+            <button (click)="addToCart(data._id , btnAdd)" #btnAdd class="btn text-light bg-main w-100">Add +</button>
+        </div>
+    </div>
+   </div>
+
+</div>

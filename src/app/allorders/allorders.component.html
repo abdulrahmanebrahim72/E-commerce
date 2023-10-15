@@ -1,0 +1,18 @@
+<section class="my-4">
+    <div class="container py-3 bg-light">
+        <div class="row g-3 border-bottom my-3" *ngFor="let order of allUserOrders;let i = index;">
+            <div class="col-12 d-flex justify-content-evenly catShadow py-2">
+                <h4>Order number: <span class="text-main fw-bold">{{i+1}}</span></h4>
+                <h4>Total price: <span class="text-main fw-bold">{{order?.totalOrderPrice}}</span></h4>
+            </div>
+            <div class="col-lg-2 col-md-3 col-6" *ngFor="let product of order.cartItems;">
+                <figure class="catShadow">
+                    <img class="w-100" height="240px" [src]="product.product?.imageCover" [alt]="product.product?.category.name">
+                    <figcaption class="text-center bg-main">
+                        <h6 class="py-2 fw-bolder text-white">{{product.product?.title.split(' ').slice(0,2).join(' ')}}</h6>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
